@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRYPTO TRADING MASTERY — Курс по криптотрейдингу</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0b0d14;
+      color: #e2e8f0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 100px 0; position: relative; }
+    .section-label {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #f7931a;
+      border: 1px solid rgba(247,147,26,0.3);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #f7f8fc 0%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-desc {
+      font-size: 1.125rem;
+      color: #94a3b8;
+      max-width: 640px;
+      line-height: 1.7;
+    }
+    .glow-orange {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      pointer-events: none;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    .glow-orange-1 { width: 600px; height: 600px; background: #f7931a; top: -200px; right: -200px; }
+    .glow-orange-2 { width: 400px; height: 400px; background: #f7931a; bottom: -100px; left: -100px; }
+    .glow-blue { width: 500px; height: 500px; background: #3b82f6; top: 30%; left: -200px; filter: blur(140px); opacity: 0.12; position: absolute; border-radius: 50%; pointer-events: none; z-index: 0; }
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 16px 0;
+      background: rgba(11,13,20,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    header .container { display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 800; font-size: 1.35rem; letter-spacing: -0.5px; }
+    .logo span { color: #f7931a; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { font-size: 0.875rem; font-weight: 500; color: #94a3b8; transition: color 0.2s; }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      background: linear-gradient(135deg, #f7931a, #e67e22);
+      color: #0b0d14 !important;
+      padding: 10px 24px;
+      border-radius: 10px;
+      font-weight: 700 !important;
+      font-size: 0.875rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(247,147,26,0.35); }
+    #hero { padding: 180px 0 120px; overflow: hidden; }
+    #hero .container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(247,147,26,0.1); border: 1px solid rgba(247,147,26,0.2);
+      border-radius: 100px; padding: 8px 18px;
+      font-size: 0.8rem; font-weight: 600; color: #f7931a;
+      margin-bottom: 28px;
+    }
+    .hero-badge .dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; display: inline-block; animation: pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-title { font-size: 3.75rem; font-weight: 900; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 24px; }
+    .hero-title .highlight { background: linear-gradient(135deg, #f7931a 0%, #fbbf24 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.2rem; color: #94a3b8; margin-bottom: 36px; max-width: 520px; line-height: 1.7; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: linear-gradient(135deg, #f7931a, #e67e22); color: #0b0d14;
+      font-weight: 700; font-size: 1rem; padding: 16px 36px;
+      border: none; border-radius: 12px; cursor: pointer; transition: all 0.25s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(247,147,26,0.3); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: #e2e8f0; font-weight: 600; font-size: 1rem;
+      padding: 16px 36px; border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px; cursor: pointer; transition: all 0.25s;
+    }
+    .btn-outline:hover { border-color: #f7931a; color: #f7931a; }
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; }
+    .hero-card-glow {
+      position: absolute; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(247,147,26,0.15) 0%, transparent 70%);
+      border-radius: 50%; animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+    .hero-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; position: relative; z-index: 1; }
+    .hero-stat-card {
+      background: rgba(255,255,255,0.03); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.06); border-radius: 16px;
+      padding: 28px 20px; text-align: center;
+    }
+    .hero-stat-card .number { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #f7931a, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-stat-card .label { font-size: 0.8rem; color: #64748b; margin-top: 4px; }
+    .hero-stat-card.active { border-color: rgba(247,147,26,0.3); background: rgba(247,147,26,0.05); }
+    .hero-marquee {
+      margin-top: 24px; grid-column: 1 / -1; display: flex; gap: 20px; padding: 16px;
+      background: rgba(255,255,255,0.02); border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.04);
+      font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #64748b;
+    }
+    .hero-marquee span { color: #22c55e; }
+    #about { background: radial-gradient(ellipse at bottom left, rgba(247,147,26,0.03) 0%, transparent 60%); }
+    .benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 50px; position: relative; z-index: 1; }
+    .benefit-card {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px; padding: 36px 28px; transition: all 0.3s;
+    }
+    .benefit-card:hover { border-color: rgba(247,147,26,0.25); background: rgba(247,147,26,0.03); transform: translateY(-4px); }
+    .benefit-icon { width: 52px; height: 52px; background: rgba(247,147,26,0.1); border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+    .benefit-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 10px; }
+    .benefit-card p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; }
+    #program { background: radial-gradient(ellipse at top right, rgba(247,147,26,0.03) 0%, transparent 60%); }
+    .program-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 50px; position: relative; z-index: 1; }
+    .module-card {
+      background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px; padding: 32px 28px; transition: all 0.3s;
+    }
+    .module-card:hover { border-color: rgba(247,147,26,0.2); background: rgba(247,147,26,0.02); }
+    .module-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; font-weight: 600; color: #f7931a; margin-bottom: 12px; }
+    .module-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+    .module-card p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; }
+    .module-lessons { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .module-lessons span { font-size: 0.75rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 4px 12px; color: #94a3b8; }
+    #reviews { background: radial-gradient(ellipse at center, rgba(247,147,26,0.02) 0%, transparent 60%); }
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; position: relative; z-index: 1; }
+    .review-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 32px 28px; transition: all 0.3s; }
+    .review-card:hover { border-color: rgba(247,147,26,0.2); }
+    .review-stars { color: #f7931a; font-size: 1rem; margin-bottom: 14px; letter-spacing: 2px; }
+    .review-text { font-size: 0.95rem; color: #cbd5e1; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #f7931a, #e67e22); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9rem; color: #0b0d14; }
+    .review-name { font-weight: 600; font-size: 0.9rem; }
+    .review-role { font-size: 0.75rem; color: #64748b; }
+    #pricing { background: radial-gradient(ellipse at bottom right, rgba(247,147,26,0.03) 0%, transparent 60%); }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 50px; position: relative; z-index: 1; }
+    .pricing-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; padding: 40px 32px; transition: all 0.3s; position: relative; }
+    .pricing-card:hover { transform: translateY(-4px); }
+    .pricing-card.featured { border-color: rgba(247,147,26,0.3); background: rgba(247,147,26,0.04); }
+    .pricing-card.featured::before {
+      content: 'Рекомендуем'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, #f7931a, #e67e22); color: #0b0d14;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+      padding: 6px 18px; border-radius: 100px;
+    }
+    .pricing-name { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #f7931a; font-weight: 600; margin-bottom: 16px; }
+    .pricing-price { font-size: 3rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 4px; }
+    .pricing-price span { font-size: 1.2rem; font-weight: 600; color: #64748b; }
+    .pricing-period { font-size: 0.85rem; color: #64748b; margin-bottom: 28px; }
+    .pricing-features { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
+    .pricing-features li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #cbd5e1; }
+    .pricing-features .check { color: #22c55e; font-weight: 700; }
+    .pricing-features .cross { color: #ef4444; font-weight: 700; }
+    .pricing-btn { display: block; text-align: center; padding: 14px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; transition: all 0.25s; border: 1px solid rgba(255,255,255,0.1); color: #e2e8f0; background: rgba(255,255,255,0.03); }
+    .pricing-btn:hover { border-color: #f7931a; color: #f7931a; }
+    .pricing-card.featured .pricing-btn { background: linear-gradient(135deg, #f7931a, #e67e22); color: #0b0d14; border: none; }
+    .pricing-card.featured .pricing-btn:hover { box-shadow: 0 8px 30px rgba(247,147,26,0.3); }
+    #cta { padding: 120px 0; background: radial-gradient(ellipse at center, rgba(247,147,26,0.05) 0%, transparent 60%); }
+    .cta-wrap { position: relative; z-index: 1; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 32px; padding: 72px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+    .cta-left .section-title { font-size: 2.25rem; }
+    .cta-left .section-desc { font-size: 1rem; }
+    .cta-benefits { margin-top: 24px; display: flex; flex-direction: column; gap: 12px; }
+    .cta-benefits li { display: flex; align-items: center; gap: 10px; font-size: 0.9rem; color: #94a3b8; }
+    .cta-benefits .check-icon { color: #22c55e; font-weight: 700; }
+    .form-wrap { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 36px 32px; }
+    .form-wrap h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: #94a3b8; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; padding: 14px 16px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; color: #e2e8f0; font-size: 0.95rem; font-family: 'Inter', sans-serif; transition: border-color 0.2s; outline: none; }
+    .form-group input:focus, .form-group select:focus { border-color: #f7931a; }
+    .form-group select option { background: #0b0d14; color: #e2e8f0; }
+    .form-submit { width: 100%; padding: 16px; background: linear-gradient(135deg, #f7931a, #e67e22); color: #0b0d14; font-weight: 700; font-size: 1rem; border: none; border-radius: 12px; cursor: pointer; transition: all 0.25s; margin-top: 8px; }
+    .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(247,147,26,0.25); }
+    .form-note { margin-top: 12px; font-size: 0.75rem; color: #64748b; text-align: center; }
+    footer { border-top: 1px solid rgba(255,255,255,0.04); padding: 40px 0; }
+    footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    footer .copy { font-size: 0.8rem; color: #64748b; }
+    footer .socials { display: flex; gap: 20px; }
+    footer .socials a { color: #64748b; font-size: 0.85rem; transition: color 0.2s; }
+    footer .socials a:hover { color: #f7931a; }
+    @media (max-width: 1024px) {
+      .benefits-grid { grid-template-columns: repeat(2,1fr); }
+      .reviews-grid { grid-template-columns: repeat(2,1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+      .cta-wrap { grid-template-columns: 1fr; padding: 48px 32px; }
+    }
+    @media (max-width: 900px) {
+      #hero .container { grid-template-columns: 1fr; text-align: center; }
+      .hero-sub { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-title { font-size: 2.75rem; }
+      .hero-stats-grid { max-width: 400px; margin: 0 auto; }
+      .hero-marquee { justify-content: center; flex-wrap: wrap; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 768px) {
+      section { padding: 70px 0; }
+      .section-title { font-size: 2rem; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .program-grid { grid-template-columns: 1fr; }
+      .cta-wrap { padding: 32px 20px; }
+    }
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2rem; }
+      .hero-stat-card { padding: 20px 14px; }
+      .hero-stat-card .number { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="logo">CRYPTO<span>MASTERY</span></div>
+      <nav class="nav-links">
+        <a href="#about">О курсе</a>
+        <a href="#program">Программа</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#pricing">Цены</a>
+        <a href="#cta" class="nav-cta">Записаться</a>
+      </nav>
+    </div>
+  </header>
+  <section id="hero">
+    <div class="glow-orange glow-orange-1"></div>
+    <div class="container">
+      <div class="hero-left">
+        <div class="hero-badge"><span class="dot"></span> Старт 15 июня • Места ограничены</div>
+        <h1 class="hero-title">Стань профи в <span class="highlight">криптотрейдинге</span></h1>
+        <p class="hero-sub">Практический курс для новичков и продолжающих. Освой стратегии, управление рисками и психологию трейдинга с нуля до уверенной торговли.</p>
+        <div class="hero-actions">
+          <a href="#cta" class="btn-primary">Записаться на курс <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+          <a href="#program" class="btn-outline">Программа обучения</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-glow"></div>
+        <div class="hero-stats-grid">
+          <div class="hero-stat-card active"><div class="number">$1.8M+</div><div class="label">Прибыль студентов</div></div>
+          <div class="hero-stat-card"><div class="number">4 200+</div><div class="label">Выпускников</div></div>
+          <div class="hero-stat-card"><div class="number">86%</div><div class="label">Успешных сделок</div></div>
+          <div class="hero-stat-card"><div class="number">24/7</div><div class="label">Поддержка</div></div>
+          <div class="hero-marquee">🔥 BTC $71,240 · ETH $3,890 · SOL $168 · <span>● Рынок открыт</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="about">
+    <div class="glow-blue"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <div class="section-label">Почему мы</div>
+      <h2 class="section-title">Что ты получишь на курсе</h2>
+      <p class="section-desc">Никакой воды — только проверенные стратегии и реальный опыт, который работает на любом рынке.</p>
+      <div class="benefits-grid">
+        <div class="benefit-card"><div class="benefit-icon">📊</div><h3>Готовая стратегия</h3><p>Пошаговая система входа и выхода из сделок. Торгуй по чёткому плану, а не на эмоциях.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">🛡️</div><h3>Управление рисками</h3><p>Научим сохранять капитал. Risk‑менеджмент — главный навык, который отличает профи от любителя.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">🤖</div><h3>Инструменты и боты</h3><p>Обзор лучших терминалов, аналитических платформ и торговых ботов для автоматизации.</p></div>
+        <div class="benefit-card"><div class="benefit-icon">🧠</div><h3>Психология трейдинга</h3><p>Как победить FOMO, страх и жадность. Эмоциональный контроль = стабильная прибыль.</p></div>
+      </div>
+    </div>
+  </section>
+  <section id="program">
+    <div class="glow-orange glow-orange-2"></div>
+    <div class="container" style="position:relative;z-index:1">
+      <div class="section-label">Программа</div>
+      <h2 class="section-title">Модули курса</h2>
+      <p class="section-desc">8 недель интенсивного обучения от основ до профессиональных стратегий.</p>
+      <div class="program-grid">
+        <div class="module-card"><div class="module-num">Модуль 1</div><h3>Основы крипторынка</h3><p>Блокчейн, биржи, стакан, типы ордеров. Строим фундамент в первую неделю.</p><div class="module-lessons"><span>Устройство рынка</span><span>Типы ордеров</span><span>Выбор биржи</span></div></div>
+        <div class="module-card"><div class="module-num">Модуль 2</div><h3>Технический анализ</h3><p>Уровни, тренды, свечные паттерны, индикаторы. Читай график как открытую книгу.</p><div class="module-lessons"><span>Свечной анализ</span><span>Трендовые линии</span><span>Индикаторы</span><span>Объёмы</span></div></div>
+        <div class="module-card"><div class="module-num">Модуль 3</div><h3>Стратегии торговли</h3><p>Скальпинг, свинг-трейдинг, трендовая торговля. Найди свой стиль.</p><div class="module-lessons"><span>Скальпинг</span><span>Свинг-трейдинг</span><span>Трендовая</span><span>Контр-тренд</span></div></div>
+        <div class="module-card"><div class="module-num">Модуль 4</div><h3>Фундаментальный анализ</h3><p>Оценка проектов, токеномика, метрики on-chain, новостной фон и sentiment.</p><div class="module-lessons"><span>Оценка проектов</span><span>Токеномика</span><span>On-chain метрики</span></div></div>
+        <div class="module-card"><div class="module-num">Модуль 5</div><h3>Управление капиталом</h3><p>Риск-менеджмент, диверсификация, фиксация прибыли. Сохраняй и приумножай.</p><div class="module-lessons"><span>Риск на сделку</span><span>Диверсификация</span><span>Фиксация прибыли</span></div></div>
+        <div class="module-card"><div class="module-num">Модуль 6</div><h3>Психология и дисциплина</h3><p>Трейдинг-джорнал, эмоциональный контроль, торговый план. Стань роботом.</p><div class="module-lessons"><span>Торговый план</span><span>Контроль эмоций</span><span>Джорналинг</span></div></div>
+        <div class="module-card"><div class="module-num">Модуль 7</div><h3>DeFi и фарминг</h3><p>Yield farming, стейкинг, пулы ликвидности. Дополнительный доход вне торговли.</p><div class="module-lessons"><span>Yield farming</span><span>Стейкинг</span><span>Пулы ликвидности</span></div></div>
+        <div class="module-card"><div class="module-num">Модуль 8</div><h3>Live-торговля</h3><p>Совместные торговые сессии с наставником в реальном времени. Разбор сделок.</p><div class="module-lessons"><span>Торговля с ментором</span><span>Разбор сделок</span><span>Финальный экзамен</span></div></div>
+      </div>
+    </div>
+  </section>
+  <section id="reviews">
+    <div class="container" style="position:relative;z-index:1">
+      <div class="section-label">Отзывы</div>
+      <h2 class="section-title">Что говорят студенты</h2>
+      <p class="section-desc">Реальные люди, реальные результаты. Без фейков и накруток.</p>
+      <div class="reviews-grid">
+        <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">«До курса сливал депозит за депозитом. Системный подход и риск-менеджмент перевернули моё понимание торговли. За 2 месяца вышел в плюс 34%!»</p><div class="review-author"><div class="review-avatar">АК</div><div><div class="review-name">Артём К.</div><div class="review-role">Трейдер, 8 месяцев в рынке</div></div></div></div>
+        <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">«Очень структурированная подача. Без воды, всё по делу. Особенно зашли модули по психологии — теперь торговля осознанная.»</p><div class="review-author"><div class="review-avatar">ЕМ</div><div><div class="review-name">Екатерина М.</div><div class="review-role">Начинающий трейдер</div></div></div></div>
+        <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">«Прошёл уже 3 курса по трейдингу, но только здесь дали реально работающую систему. Live-сессии с ментором — это просто бомба.»</p><div class="review-author"><div class="review-avatar">ДЛ</div><div><div class="review-name">Дмитрий Л.</div><div class="review-role">Криптоэнтузиаст</div></div></div></div>
+      </div>
+    </div>
+  </section>
+  <section id="pricing">
+    <div class="container" style="position:relative;z-index:1">
+      <div class="section-label">Тарифы</div>
+      <h2 class="section-title">Выбери свой план</h2>
+      <p class="section-desc">Подбери формат обучения под свои цели. Все тарифы включают доступ в закрытое сообщество.</p>
+      <div class="pricing-grid">
+        <div class="pricing-card"><div class="pricing-name">Старт</div><div class="pricing-price">29 900 ₽</div><div class="pricing-period">единоразово</div><ul class="pricing-features"><li><span class="check">✓</span> Все 8 модулей в записи</li><li><span class="check">✓</span> Доступ на 6 месяцев</li><li><span class="check">✓</span> Закрытый чат</li><li><span class="cross">✗</span> Live-сессии с ментором</li><li><span class="cross">✗</span> Личный разбор сделок</li><li><span class="cross">✗</span> Сертификат</li></ul><a href="#cta" class="pricing-btn">Выбрать тариф</a></div>
+        <div class="pricing-card featured"><div class="pricing-name">Pro</div><div class="pricing-price">49 900 ₽</div><div class="pricing-period">единоразово</div><ul class="pricing-features"><li><span class="check">✓</span> Все 8 модулей в записи</li><li><span class="check">✓</span> Доступ на 12 месяцев</li><li><span class="check">✓</span> Закрытый чат</li><li><span class="check">✓</span> 4 Live-сессии с ментором</li><li><span class="check">✓</span> Разбор 10 сделок</li><li><span class="cross">✗</span> Сертификат</li></ul><a href="#cta" class="pricing-btn">Выбрать тариф</a></div>
+        <div class="pricing-card"><div class="pricing-name">VIP</div><div class="pricing-price">89 900 ₽</div><div class="pricing-period">единоразово</div><ul class="pricing-features"><li><span class="check">✓</span> Все 8 модулей в записи</li><li><span class="check">✓</span> Бессрочный доступ</li><li><span class="check">✓</span> Закрытый чат + VIP-чат</li><li><span class="check">✓</span> 12 Live-сессий с ментором</li><li><span class="check">✓</span> Неограниченный разбор сделок</li><li><span class="check">✓</span> Сертификат + NEMO NFT</li></ul><a href="#cta" class="pricing-btn">Выбрать тариф</a></div>
+      </div>
+    </div>
+  </section>
+  <section id="cta">
+    <div class="glow-orange glow-orange-1" style="top:-100px;right:-100px"></div>
+    <div class="container">
+      <div class="cta-wrap">
+        <div class="cta-left"><div class="section-label">Старт 15 июня</div><h2 class="section-title">Начни свой путь в трейдинге уже сегодня</h2><p class="section-desc">Заполни форму — мы свяжемся с тобой в течение 24 часов, поможем выбрать тариф и ответим на все вопросы.</p><ul class="cta-benefits"><li><span class="check-icon">✓</span> Бесплатная консультация</li><li><span class="check-icon">✓</span> Доступ к Demo-уроку</li><li><span class="check-icon">✓</span> Скидка 15% при оплате до 10 июня</li></ul></div>
+        <div class="form-wrap"><h3>Оставь заявку</h3><form id="enrollForm" onsubmit="handleSubmit(event)"><div class="form-group"><label for="name">Имя</label><input type="text" id="name" name="name" placeholder="Ваше имя" required /></div><div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required /></div><div class="form-group"><label for="phone">Телефон</label><input type="tel" id="phone" name="phone" placeholder="+7 (999) 000-00-00" /></div><div class="form-group"><label for="tariff">Тариф</label><select id="tariff" name="tariff"><option value="start">Старт — 29 900 ₽</option><option value="pro" selected>Pro — 49 900 ₽</option><option value="vip">VIP — 89 900 ₽</option></select></div><button type="submit" class="form-submit">Отправить заявку</button></form><p class="form-note">Нажимая кнопку, ты соглашаешься с политикой обработки данных.</p><p class="form-note" id="formSuccess" style="display:none;color:#22c55e;font-weight:600;">✓ Спасибо! Мы свяжемся с тобой в ближайшее время.</p></div>
+      </div>
+    </div>
+  </section>
+  <footer><div class="container"><div class="copy">© 2026 CRYPTOMASTERY. All rights reserved.</div><div class="socials"><a href="#">Twitter / X</a><a href="#">Telegram</a><a href="#">Discord</a><a href="#">YouTube</a></div></div></footer>
+  <script>
+    function handleSubmit(e) { e.preventDefault(); document.getElementById('enrollForm').reset(); const s = document.getElementById('formSuccess'); s.style.display = 'block'; setTimeout(() => { s.style.display = 'none'; }, 5000); }
+  </script>
+</body>
+</html>
